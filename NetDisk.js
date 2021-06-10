@@ -25,7 +25,8 @@ app.post("/info",  function (req, res) {
   // form.maxFilesSize = 1 * 1024 * 1024;
   form.parse(req, function (err, fields, files) {
     try {
-      let inputFile = files.file[0];
+      console.log(files)
+      let inputFile = files.uploadFile[0];
       let newPath = form.uploadDir + "/" + inputFile.originalFilename;
       // 同步重命名文件名 fs.renameSync(oldPath, newPath)
 　　　 //oldPath  不得作更改，使用默认上传路径就好

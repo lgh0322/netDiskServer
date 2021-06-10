@@ -15,14 +15,16 @@ const multiparty = require('multiparty')
 const fs = require('fs')
  
 app.post("/info",  function (req, res) {
-  /* 生成multiparty对象，并配置上传目标路径 */
+
   let form = new multiparty.Form();
-  // 设置编码
+
   form.encoding = 'utf-8';
-  // 设置文件存储路径，以当前编辑的文件为相对路径
+
   form.uploadDir = './images';
+
   // 设置文件大小限制
   // form.maxFilesSize = 1 * 1024 * 1024;
+  
   form.parse(req, function (err, fields, files) {
     try {
       console.log(files)

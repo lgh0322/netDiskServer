@@ -6,9 +6,7 @@ const port = 3000
 app.use(express.json());
 app.use(express.urlencoded());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+
 
 const multiparty = require('multiparty')
  
@@ -50,6 +48,10 @@ app.post('/login',function(req,res){
   res.end("yes");  
 });  
 
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/3.png');
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

@@ -49,9 +49,46 @@ app.post('/login',function(req,res){
 });  
 
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/3.png');
+app.get('/tendency', (req, res) => {
+  console.log(req.headers.password)
+  if(req.rawHeaders[1]=="gaga"){
+    res.sendFile(__dirname + '/3.png');
+  }else{
+    res.send("Hello word")
+    res.end()
+  }
+ 
 });
+
+ fs.unlinkSync(__dirname +"\\haha\\dsfg.txt")
+
+
+
+/**
+ * 
+ * @param {*} path 必传参数可以是文件夹可以是文件
+ * @param {*} reservePath 保存path目录 path值与reservePath值一样就保存
+ */
+function delFile(path, reservePath) {
+    if (fs.existsSync(path)) {
+        if (fs.statSync(path).isDirectory()) {
+            let files = fs.readdirSync(path);
+            files.forEach((file, index) => {
+                let currentPath = path + "/" + file;
+                if (fs.statSync(currentPath).isDirectory()) {
+                    delFile(currentPath, reservePath);
+                } else {
+                    fs.unlinkSync(currentPath);
+                }
+            });
+            if (path != reservePath) {
+                fs.rmdirSync(path);
+            }
+        } else {
+            fs.unlinkSync(path);
+        }
+    }
+}
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
